@@ -2,6 +2,7 @@ import Pricing from "../Pricing"; // Reusing the existing Pricing component
 import PageHero from "../components/PageHero";
 import CtaBand from "../components/CtaBand";
 import Sec from "../components/Sec";
+import Faq from "../components/Faq";
 import { SITE_URL, EMAIL, SIGNUP_URL, socials } from "@/lib/site";
 import { motion } from "framer-motion";
 
@@ -14,36 +15,24 @@ export const metadata = {
 // FAQ data for pricing page
 const pricingFAQ = [
   {
-    question: "What's the difference between monthly and annual billing?",
-    answer: "Annual billing offers a significant discount compared to monthly billing. You save approximately 20% when you choose annual billing."
+    question: "How is Kayven priced?",
+    answer: "Three plans: Basic, Standard and Pro AI. Pricing is available in rupees for India and dollars globally, billed monthly or yearly. Use the toggles to switch."
   },
   {
-    question: "Can I change my plan later?",
-    answer: "Yes, you can upgrade, downgrade, or cancel your plan at any time from your account settings."
+    question: "What is the difference between monthly and yearly billing?",
+    answer: "Yearly billing is one annual payment at a lower price than twelve monthly payments."
   },
   {
-    question: "Is there a free trial?",
-    answer: "Kayven offers a free tier with basic tracking features. Premium features are available in our paid plans."
+    question: "Can I cancel anytime?",
+    answer: "Yes. Subscriptions renew according to your selected billing period unless cancelled."
   },
   {
-    question: "What payment methods do you accept?",
-    answer: "We accept all major credit cards and digital payment methods through secure payment processors."
+    question: "Can I get a refund?",
+    answer: "To ask about a refund, email shiva@kayven.in from the address on your account. {/* TODO(policy): replace with the real policy */}"
   },
   {
-    question: "How does the food database work?",
-    answer: "Our food database contains 926,000+ foods with nutrition information sourced from verified databases and user contributions."
-  },
-  {
-    question: "Can I track macros with the free plan?",
-    answer: "The free plan includes basic calorie tracking. Macro tracking is available in our paid plans starting with the Basic tier."
-  },
-  {
-    question: "Do you offer student or family discounts?",
-    answer: "Currently we don't offer specialized discounts, but we provide competitive pricing for all users. Email us for special inquiries."
-  },
-  {
-    question: "Is my data safe and private?",
-    answer: "Yes, we use industry-standard encryption and security practices to protect your health data. We never sell your personal information."
+    question: "Is Kayven a medical app?",
+    answer: "Kayven is a health and wellness platform. It is not intended to diagnose medical conditions or replace professional medical care."
   }
 ];
 
@@ -54,7 +43,7 @@ export default function PricingPage() {
       <PageHero
         label="Pricing"
         headline="Choose your plan"
-        intro="Select the Kayven plan that matches your health goals and budget."
+        intro="Personalised nutrition, workouts, progress tracking and AI coaching — all in one place. Choose the plan that fits your goals."
       />
 
       {/* Pricing Component */}
@@ -64,14 +53,7 @@ export default function PricingPage() {
 
       {/* FAQ Section */}
       <Sec id="pricing-faq" n="10" label="FAQ" title="Pricing questions">
-        <div className="space-y-4">
-          {pricingFAQ.map((faq, index) => (
-            <div key={index} className="border-b border-black pb-4 last:border-0 last:pb-0">
-              <h3 className="text-lg font-medium mb-2">{faq.question}</h3>
-              <p className="text-base">{faq.answer}</p>
-            </div>
-          ))}
-        </div>
+        <Faq items={pricingFAQ} />
         {/* Learn more link - for FAQ, link to contact for unanswered questions */}
         <div className="mt-6">
           <a href="/contact" className="lbl hover:underline">Have more questions? Contact us →</a>

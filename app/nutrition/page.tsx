@@ -3,6 +3,7 @@ import CtaBand from "../components/CtaBand";
 import Sec from "../components/Sec";
 import { SITE_URL, EMAIL, SIGNUP_URL, socials } from "@/lib/site";
 import { motion } from "framer-motion";
+import CountUp from "../components/motion/CountUp";
 
 // Metadata for the nutrition page
 export const metadata = {
@@ -16,13 +17,17 @@ const nutritionSections = [
     id: "food-logging",
     label: "food-logging",
     title: "Log meals your way",
-    content: "Kayven makes nutrition tracking effortless with multiple input methods that fit your lifestyle and preferences.",
+    content: "Log meals your way — search, scan a barcode, or use food photo recognition — and keep track of the nutrition that matters to you.",
     features: [
-      "Food photo recognition",
+      "Food photo scanning",
       "Barcode scanning",
-      "Text search",
-      "Voice logging",
-      "Meal templates"
+      "Food search",
+      "Calories",
+      "Protein",
+      "Carbohydrates",
+      "Fat",
+      "Fiber",
+      "Meal planning"
     ],
     stat: {
       value: 926000,
@@ -48,27 +53,14 @@ const nutritionSections = [
   {
     id: "meal-planning",
     label: "meal-planning",
-    title: "Smart meal planning",
-    content: "Plan balanced meals that hit your nutrition targets while fitting your schedule, preferences, and budget.",
-    features: [
-      "Goal-based meal suggestions",
-      "Automatic grocery lists",
-      "Leftover utilization",
-      "Batch cooking optimization"
-    ]
+    title: "Meal planning",
+    content: "Plan your meals ahead of time based on your goals and nutrition requirements. Your meal plans become more personalised as Kayven learns from your data."
   },
   {
     id: "nutrition-insights",
     label: "nutrition-insights",
     title: "Nutrition insights",
-    content: "Understand how your food choices affect your energy, mood, hunger, and fitness performance with personalized nutrition analytics."
-    ,
-    features: [
-      "Meal timing analysis",
-      "Nutrient density scoring",
-      "Food sensitivity detection",
-      "Hydration tracking"
-    ]
+    content: "Understand your nutrition patterns to see how your food choices affect your energy, mood, hunger, and fitness performance."
   }
 ];
 
@@ -78,8 +70,8 @@ export default function NutritionPage() {
       {/* Page Hero */}
       <PageHero
         label="Nutrition"
-        headline="Food Tracking Made Simple"
-        intro="Track your nutrition with food photo scanning, barcode scanning, and comprehensive meal logging."
+        headline="Know what you're eating."
+        intro="Log meals your way — search, scan a barcode, or use food photo recognition — and keep track of the nutrition that matters to you."
       />
 
       {/* Content Sections */}
@@ -88,15 +80,16 @@ export default function NutritionPage() {
           <Sec
             key={section.id}
             id={section.id}
-            n={`${index + 1}`}
-            label={section.label.toLowerCase()}
+            n={String(index + 1).padStart(2, '0')}
+            label={section.label.replace(/-/g, ' ').toUpperCase()}
             title={section.title}
           >
             <p>{section.content}</p>
 
             {section.stat && (
               <div className="mb-6">
-                <Big v={section.stat.value} l={section.stat.label} />
+                <CountUp value={section.stat.value} />
+                <p className="lbl mt-2">{section.stat.label}+</p>
               </div>
             )}
 

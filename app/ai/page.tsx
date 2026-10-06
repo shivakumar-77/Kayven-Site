@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 // Metadata for the AI page
 export const metadata = {
   title: "Kayven AI — Personalised Health Intelligence",
-  description: "Kayven AI provides intelligent guidance that learns from your data to make personalized recommendations."
+  description: "Kayven AI provides intelligent guidance that learns from your data to make personalised recommendations."
 };
 
 // Content sections for AI page
@@ -15,38 +15,38 @@ const aiSections = [
   {
     id: "why-context",
     label: "why-context",
-    title: "Why health AI needs context",
-    content: "Health data without context is just numbers. Kayven AI uses your goals, behaviors, and progress to turn raw data into meaningful insights."
+    title: "Understands your context",
+    content: "Your goals and behaviour provide the context behind your recommendations."
   },
   {
     id: "intelligence-layer",
     label: "intelligence-layer",
-    title: "Kayven intelligence layer",
-    content: "Our AI analyzes your nutrition, fitness, progress, and daily habits to identify patterns and provide recommendations that actually work for your lifestyle."
+    title: "Connects the dots",
+    content: "Nutrition, fitness and progress don’t exist in isolation."
   },
   {
     id: "user-context",
     label: "user-context",
-    title: "Your context",
-    content: "Kayven AI considers your goals, preferences, nutrition behavior, training behavior, progress, and historical information to make the experience increasingly relevant over time."
+    title: "Gets more personal",
+    content: "Your experience can become more relevant as Kayven learns from your ongoing data."
   },
   {
     id: "nutrition-intelligence",
     label: "nutrition-intelligence",
     title: "Nutrition intelligence",
-    content: "Get personalized meal suggestions, macro adjustments, and food recommendations based on how your body responds to different foods and your nutritional goals."
+    content: "Get personalised nutrition recommendations based on your food tracking data and health goals."
   },
   {
     id: "fitness-intelligence",
     label: "fitness-intelligence",
     title: "Fitness intelligence",
-    content: "Receive workout adaptations, exercise recommendations, and recovery guidance based on your performance, energy levels, and fitness progress."
+    content: "Receive personalised fitness recommendations based on your workout data and progress."
   },
   {
     id: "progress-intelligence",
     label: "progress-intelligence",
     title: "Progress intelligence",
-    content: "See how your habits compound over time with trend analysis, milestone predictions, and insights into what's really moving the needle on your health goals."
+    content: "See how your health data compounds over time to show your progress in context."
   },
   {
     id: "personalised-recommendations",
@@ -58,7 +58,7 @@ const aiSections = [
     id: "future-health-intelligence",
     label: "future-health-intelligence",
     title: "Future health intelligence",
-    content: "As Kayven learns more about you, the AI becomes better at predicting your needs before you even realize them, shifting from reactive to proactive health management."
+    content: "As Kayven learns more about you, the AI becomes better at predicting your needs before you even realise them, shifting from reactive to proactive health management."
   },
   {
     id: "responsible-ai",
@@ -74,8 +74,8 @@ export default function AIPage() {
       {/* Page Hero */}
       <PageHero
         label="AI"
-        headline="Personalised Health Intelligence"
-        intro="Kayven AI provides intelligent guidance that learns from your data to make personalized recommendations."
+        headline="An intelligence layer for your health."
+        intro="Kayven connects the information you choose to track with your goals and progress, helping turn daily health data into more relevant insights and recommendations."
       />
 
       {/* Content Sections */}
@@ -84,8 +84,8 @@ export default function AIPage() {
           <Sec
             key={section.id}
             id={section.id}
-            n={`${index + 1}`}
-            label={section.label.toLowerCase()}
+            n={String(index + 1).padStart(2, '0')}
+            label={section.label.replace(/-/g, ' ').toUpperCase()}
             title={section.title}
           >
             <p>{section.content}</p>

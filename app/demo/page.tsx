@@ -37,7 +37,7 @@ export default function DemoPage() {
       />
 
       {/* Demo Content */}
-      <Sec id="demo-narrative" n="01" label="Demo" title="One user’s journey.">
+      <Sec id="demo-narrative" n="01" label="DEMO" title="One user’s journey.">
         <p>The product demo should follow one user’s journey:</p>
         <ol className="grid sm:grid-cols-2 gap-px bg-black border border-black">
           {demoScenes.map((scene, index) => (
@@ -59,7 +59,7 @@ export default function DemoPage() {
       </Sec>
 
       {/* Learn more links to individual sections */}
-      <Sec id="demo-learn-more" n="02" label="Learn More" title="Explore Kayven features">
+      <Sec id="demo-learn-more" n="02" label="LEARN MORE" title="Explore Kayven features">
         <div className="grid sm:grid-cols-2 gap-6">
           <div>
             <h3 className="text-xl mb-4">Nutrition Tracking</h3>
@@ -73,7 +73,7 @@ export default function DemoPage() {
           </div>
           <div>
             <h3 className="text-xl mb-4">AI Guidance</h3>
-            <p>Get personalized recommendations that learn from your data over time.</p>
+            <p>Get personalised recommendations that learn from your data over time.</p>
             <a href="/ai" className="lbl hover:underline">Explore AI →</a>
           </div>
           <div>

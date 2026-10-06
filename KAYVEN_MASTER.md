@@ -2,7 +2,7 @@ KAYVEN — MASTER WEBSITE DATA
 
 Single Source of Truth
 
-Version: October 2026
+Version: October 2026 (rev 2)
 
 ⸻
 
@@ -305,6 +305,8 @@ or
 Future vision
 
 Do not present future capabilities as currently available.
+
+The website does not mention future features. Only describe what is live.
 
 ⸻
 
@@ -610,85 +612,45 @@ Your health, understood.
 
 26. PRICING — INDIA
 
-Free
-
-₹0
-
-Designed for users who want to start tracking.
-
-Basic
-
-₹299/month
-
-₹2,299/year
-
-Designed for users who want expanded health and nutrition tracking.
-
-Standard
-
-₹499/month
-
-₹3,899/year
-
-Designed for users who want a broader personalised health experience.
-
-Pro AI
-
-₹1,399/month
-
-₹10,899/year
-
-Designed for users who want the most advanced AI-powered personalisation experience.
+Basic. "Essential features for getting started with Kayven."
+  Food tracking / Basic nutrition insights / AI Coach / Meal planning /
+  Workout planning / Progress tracking
+Standard (the only highlighted plan, tag "Recommended").
+  "Enhanced features for regular users."
+  Everything in Basic / Advanced nutrition insights / AI Coach
+  (advanced) / Personalised meal planning / Advanced workout plans /
+  Progress analytics
+Pro AI. "The complete Kayven intelligence experience."
+  Everything in Standard / Custom AI recommendations / Performance
+  tracking / Priority support
+India, price and crossed-out original price:
+  Monthly: Basic 299 (was 499), Standard 499 (was 799), Pro AI 1,399 (was 1,999)
+  Yearly:  Basic 2,299 (was 3,999), Standard 3,899 (was 6,499), Pro AI 10,899 (was 15,499)
 
 ⸻
 
 27. PRICING — GLOBAL
 
-Free
-
-$0
-
-Basic
-
-$9.99/month
-
-$69.99/year
-
-Standard
-
-$19.99/month
-
-$139.99/year
-
-Pro AI
-
-$39.99/month
-
-$279.99/year
+Basic. "Essential features for getting started with Kayven."
+  Food tracking / Basic nutrition insights / AI Coach / Meal planning /
+  Workout planning / Progress tracking
+Standard (the only highlighted plan, tag "Recommended").
+  "Enhanced features for regular users."
+  Everything in Basic / Advanced nutrition insights / AI Coach
+  (advanced) / Personalised meal planning / Advanced workout plans /
+  Progress analytics
+Pro AI. "The complete Kayven intelligence experience."
+  Everything in Standard / Custom AI recommendations / Performance
+  tracking / Priority support
+Global (no original prices, no discount rows):
+  Monthly: Basic 9.99, Standard 19.99, Pro AI 39.99
+  Yearly:  Basic 69.99, Standard 139.99, Pro AI 279.99
 
 ⸻
 
 28. PRICING RULE
 
-Pricing feature entitlements must only be displayed if they are confirmed in the actual product.
-
-Do not invent differences between plans.
-
-If feature gating is not yet implemented, display the pricing tiers without making unsupported feature promises.
-
-⸻
-
-29. FUTURE COACHING
-
-Potential future offering:
-
-Personalised Nutrition Coaching
-
-Indicative planned pricing:
-
-₹7,999 / 6 months
-
-This should be labelled as upcoming unless the service is actually live.
+Plan features come from the live kayven.in app pricing page (October 2026). Do not add features that are not listed here.
 
 ⸻
 
@@ -737,50 +699,30 @@ Make personalised health guidance more accessible, connected and actionable.
 33. TEAM
 
 Shiva Kumar
-
 Founder & CEO
-
 Shiva Kumar is the founder of Kayven and leads product, technology, strategy and company building.
-
 Background:
-
 * BTech CSE — AI
 * Dr. M.G.R. Educational and Research Institute
 * Chennai, India
+LinkedIn: https://www.linkedin.com/in/shiva-kumar-152820253/
+Instagram: https://www.instagram.com/shivakumarog_/
+Email: shiva@kayven.in
 
-⸻
-
-Nikita
-
-Co-founder & Head of Operations
-
+Nikita Soni, Co-founder and Head of Operations
 Nikita leads operations and supports company execution, coordination and business development.
+LinkedIn: https://www.linkedin.com/in/nikita-soni-a74038431/
+Instagram: https://www.instagram.com/nikks._.s/
+Email: nikkssoni65@gmail.com
 
 ⸻
 
 34. CONTACT
 
-General
-
-hello@kayven.in
-
-Founder
-
-shiva@kayven.in
-
-Website
-
-kayven.in
-
-Social
-
-Instagram: Kayven
-
-LinkedIn: Kayven
-
-X: Kayven
-
-Use actual verified social URLs when implementing the website.
+General/Founder email: shiva@kayven.in
+Company LinkedIn: https://www.linkedin.com/in/kayven-ai-883aa5434/
+Instagram: https://www.instagram.com/kayven.ai/
+X: https://x.com/kayvenai
 
 ⸻
 
@@ -789,23 +731,16 @@ Use actual verified social URLs when implementing the website.
 Primary:
 
 Get Started
-
 Start Your Journey
-
 Try Kayven
-
 Explore Kayven
-
 Join Kayven
 
 Secondary:
 
 Watch Demo
-
 See How It Works
-
 Explore Product
-
 View Pricing
 
 ⸻
@@ -862,12 +797,12 @@ unless specifically applicable and verified.
 If a feature is not currently live, clearly label it:
 
 Coming soon
-
 or
-
 In development
 
 Do not represent future roadmap items as existing functionality.
+
+The website uses no 'Coming soon' labels. Features that are not live are omitted.
 
 ⸻
 
@@ -948,6 +883,8 @@ Light green
 #85AB8B
 
 The website may introduce neutral backgrounds, whites and soft grays around the existing brand palette.
+
+Note: The website uses pure black and white (Minimalist Monochrome). The green palette applies to the app only.
 
 ⸻
 
@@ -1168,14 +1105,6 @@ Is Kayven a medical app?
 
 Kayven is a health and wellness platform. It is not intended to diagnose medical conditions or replace professional medical care.
 
-Is Kayven free?
-
-Kayven has a free tier alongside paid plans.
-
-Where is Kayven available?
-
-Kayven is being built with an India-first approach and a longer-term global vision.
-
 ⸻
 
 50. FOOTER
@@ -1325,11 +1254,8 @@ Avoid:
 Prefer:
 
 Short sentences.
-
 Strong headlines.
-
 Clear explanations.
-
 Specific product language.
 
 ⸻
@@ -1357,3 +1283,5 @@ AI.
 One connected ecosystem designed around you.
 
 Kayven.
+
+⸻

@@ -13,18 +13,15 @@ export const metadata: Metadata = {
   description: "Kayven brings nutrition, fitness, progress tracking and AI-powered personalisation into one connected health ecosystem.",
 };
 
+import ClientClasses from "./components/ClientClasses";
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={`${pf.variable} ${ss.variable} ${jb.variable}`}>
       <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "document.documentElement.classList.add('js'); if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) { document.documentElement.classList.add('reduced-motion'); }",
-          }}
-        />
       </head>
       <body>
+        <ClientClasses />
         <SiteHeader />
         {children}
         <SiteFooter />

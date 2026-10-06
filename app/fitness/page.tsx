@@ -3,11 +3,12 @@ import CtaBand from "../components/CtaBand";
 import Sec from "../components/Sec";
 import { SITE_URL, EMAIL, SIGNUP_URL, socials } from "@/lib/site";
 import { motion } from "framer-motion";
+import CountUp from "../components/motion/CountUp";
 
 // Metadata for the fitness page
 export const metadata = {
   title: "Kayven Fitness — Train with Purpose",
-  description: "Build effective workouts with exercise libraries, training programs, and personalized fitness guidance."
+  description: "Build effective workouts with exercise libraries, training programs, and personalised fitness guidance."
 };
 
 // Content sections for fitness page
@@ -73,8 +74,8 @@ export default function FitnessPage() {
       {/* Page Hero */}
       <PageHero
         label="Fitness"
-        headline="Train with Purpose"
-        intro="Build effective workouts with exercise libraries, training programs, and personalized fitness guidance."
+        headline="Train with purpose."
+        intro="Build workouts around your goals with a growing library of exercises, structured programs and personalised fitness guidance."
       />
 
       {/* Content Sections */}
@@ -83,15 +84,16 @@ export default function FitnessPage() {
           <Sec
             key={section.id}
             id={section.id}
-            n={`${index + 1}`}
-            label={section.label.toLowerCase()}
+            n={String(index + 1).padStart(2, '0')}
+            label={section.label.replace(/-/g, ' ').toUpperCase()}
             title={section.title}
           >
             <p>{section.content}</p>
 
             {section.stat && (
               <div className="mb-6">
-                <Big v={section.stat.value} l={section.stat.label} />
+                <CountUp value={section.stat.value} />
+                <p className="lbl mt-2">{section.stat.label}+</p>
               </div>
             )}
 
