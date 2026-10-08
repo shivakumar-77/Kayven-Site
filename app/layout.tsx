@@ -3,12 +3,13 @@ import { Playfair_Display, Source_Serif_4, JetBrains_Mono } from "next/font/goog
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
+import { SITE_URL } from "@/lib/site";
 
 const pf = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
 const ss = Source_Serif_4({ subsets: ["latin"], variable: "--font-source" });
 const jb = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jb" });
 
-export const metadataBase = new URL("https://kayven.in");
+export const metadataBase = new URL(SITE_URL);
 
 export const metadata: Metadata = {
   title: {
@@ -22,11 +23,11 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_IN",
-    url: "https://kayven.in/",
+    url: SITE_URL,
     siteName: "Kayven",
     images: [
       {
-        url: "https://kayven.in/og-image.png",
+        url: `${SITE_URL}og-image.png`,
         width: 1200,
         height: 630,
         alt: "Kayven — AI-Native Personalised Health Platform",
@@ -37,7 +38,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Kayven — AI-Native Personalised Health Platform",
     description: "Kayven brings nutrition, fitness, progress tracking and AI-powered personalisation into one connected health ecosystem.",
-    images: ["https://kayven.in/twitter-image.png"],
+    images: [`${SITE_URL}twitter-image.png`],
   },
 };
 

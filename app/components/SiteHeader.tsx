@@ -7,10 +7,16 @@ import { usePathname } from "next/navigation";
 export default function SiteHeader() {
   const pathname = usePathname();
   const nav = ["Product", "AI", "Nutrition", "Fitness", "Pricing"];
+  let getStartedUrl = SIGNUP_URL;
+  if (pathname === "/") {
+    getStartedUrl = "/";
+  } else if (pathname === "/pricing") {
+    getStartedUrl = "/subscription";
+  }
 
   return (
     <>
-      <NavBar navItems={nav} signupUrl={SIGNUP_URL} />
+      <NavBar navItems={nav} signupUrl={getStartedUrl} />
       <div className="mx-auto max-w-6xl px-6 md:px-8 lg:px-12 h-20 flex items-center justify-between">
         <a href={SITE_URL} className="font-display text-3xl">Kayven</a>
         <nav className="hidden md:flex items-center gap-8">
@@ -38,7 +44,7 @@ export default function SiteHeader() {
           })}
         </nav>
         <motion.a
-          href={SIGNUP_URL}
+          href={getStartedUrl}
           className="btn !py-3 !px-5 group"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}
@@ -60,7 +66,7 @@ export default function SiteHeader() {
               return (
                 <motion.a
                   key={x}
-                  href={x === "Get Started" ? SIGNUP_URL : `/${x.toLowerCase()}`}
+                  href={x === "Get Started" ? getStartedUrl : `/${x.toLowerCase()}`}
                   className="lbl p-4 border-b border-black last:border-0"
                   aria-current={isActive ? "page" : undefined}
                   whileTap={{ scale: 0.98 }}

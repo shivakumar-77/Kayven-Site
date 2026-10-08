@@ -273,7 +273,7 @@ export default function PricingSection() {
 
                 {/* Get Started button */}
                 <motion.a
-                  href={SIGNUP_URL}
+                  href="/"
                   className={`btn w-full justify-between mt-auto
                     ${isStandard
                       ? 'bg-white text-black'

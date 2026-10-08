@@ -22,7 +22,7 @@ export default function Hero() {
             <p className="text-xl mt-8 max-w-xl">Kayven brings nutrition, fitness, progress and intelligent guidance into one personalised health ecosystem.</p>
             <div className="flex flex-wrap gap-4 mt-10">
               <motion.a
-                href={SIGNUP_URL}
+                href="/"
                 className="btn group"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
