@@ -8,7 +8,7 @@ export default function SiteFooter() {
     Product: ["Product", "AI", "Nutrition", "Fitness", "Pricing", "Demo"],
     Company: ["About", "Team", "Contact", "Careers"],
     Resources: ["Insights", "FAQ"],
-    Legal: ["Privacy Policy", "Terms of Service"],
+    Legal: ["Privacy Policy", "Terms of Service", "Refund Policy"],
     Social: ["Instagram", "LinkedIn", "X", "Email"]
   };
 

@@ -3,7 +3,7 @@ import CtaBand from "../components/CtaBand";
 import Sec from "../components/Sec";
 import { SITE_URL, EMAIL, SIGNUP_URL, socials } from "@/lib/site";
 import { motion } from "framer-motion";
-import CountUp from "../components/motion/CountUp";
+import Stat from "@/app/components/Stat";
 
 // Metadata for the nutrition page
 export const metadata = {
@@ -88,8 +88,7 @@ export default function NutritionPage() {
 
             {section.stat && (
               <div className="mb-6">
-                <CountUp value={section.stat.value} />
-                <p className="lbl mt-2">{section.stat.label}+</p>
+                <Stat value={section.stat.value} suffix="K+" label={section.stat.label} />
               </div>
             )}
 

@@ -20,7 +20,8 @@ export default function SiteHeader() {
               <motion.a
                 key={x}
                 href={`/${x.toLowerCase()}`}
-                className={`lbl group ${isActive ? "border-b-4 border-black" : ""}`}
+                className="lbl group"
+                aria-current={isActive ? "page" : undefined}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
                 transition={{ duration: 0.1, ease: [0.22, 1, 0.36, 1] }}
@@ -54,17 +55,21 @@ export default function SiteHeader() {
             Menu
           </motion.summary>
           <div className="absolute right-0 top-full mt-2 w-56 bg-white border-2 border-black flex flex-col z-20">
-            {[...nav, "Get Started"].map((x) => (
-              <motion.a
-                key={x}
-                href={x === "Get Started" ? SIGNUP_URL : `/${x.toLowerCase()}`}
-                className="lbl p-4 border-b border-black last:border-0"
-                whileTap={{ scale: 0.98 }}
-                transition={{ duration: 0.1, ease: [0.22, 1, 0.36, 1] }}
-              >
-                {x}
-              </motion.a>
-            ))}
+            {[...nav, "Get Started"].map((x) => {
+              const isActive = pathname === (x === "Get Started" ? "/get-started" : `/${x.toLowerCase()}`);
+              return (
+                <motion.a
+                  key={x}
+                  href={x === "Get Started" ? SIGNUP_URL : `/${x.toLowerCase()}`}
+                  className="lbl p-4 border-b border-black last:border-0"
+                  aria-current={isActive ? "page" : undefined}
+                  whileTap={{ scale: 0.98 }}
+                  transition={{ duration: 0.1, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  {x}
+                </motion.a>
+              );
+            })}
           </div>
         </details>
       </div>
