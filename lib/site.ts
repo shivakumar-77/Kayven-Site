@@ -1,6 +1,8 @@
-export const SITE_URL = "https://www.kayven.in/";
+export const SITE_URL = "https://site.kayven.in";
+export const APP_URL = "https://www.kayven.in/";
+export const SUBSCRIPTION_URL = "https://www.kayven.in/subscription";
+export const SIGNUP_URL = APP_URL;
 export const EMAIL = "shiva@kayven.in";
-export const SIGNUP_URL = "/get-started";
 
 export const socials = {
   company: {

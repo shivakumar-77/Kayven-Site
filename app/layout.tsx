@@ -3,6 +3,7 @@ import { Playfair_Display, Source_Serif_4, JetBrains_Mono } from "next/font/goog
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
+import CookieConsent from "./components/CookieConsent";
 import { SITE_URL } from "@/lib/site";
 
 const pf = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
@@ -12,10 +13,7 @@ const jb = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jb" });
 export const metadataBase = new URL(SITE_URL);
 
 export const metadata: Metadata = {
-  title: {
-    template: "%s — Kayven",
-    default: "Kayven — AI-Native Personalised Health Platform",
-  },
+  title: "Kayven",
   description: "Kayven brings nutrition, fitness, progress tracking and AI-powered personalisation into one connected health ecosystem.",
   icons: {
     icon: "/icon.svg",
@@ -52,6 +50,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         <ClientClasses />
         <SiteHeader />
+      <CookieConsent />
         {children}
         <SiteFooter />
       </body>

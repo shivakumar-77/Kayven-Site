@@ -1,5 +1,3 @@
-"use client";
-
 import Hero from "./components/sections/Hero";
 import Problem from "./components/sections/Problem";
 import Solution from "./components/sections/Solution";
@@ -14,6 +12,10 @@ import PricingSection from "./components/sections/PricingSection";
 import Quote from "./components/sections/Quote";
 import Vision from "./components/sections/Vision";
 import FinalCta from "./components/sections/FinalCta";
+
+export const metadata = {
+  title: "Kayven",
+};
 
 export default function Home() {
   return (

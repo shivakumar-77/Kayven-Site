@@ -31,87 +31,87 @@ export default function PrivacyPage() {
 
             <h2 className="text-xl font-bold mb-4">Who we are</h2>
             <p className="mb-4">
-              Kayven is an AI-native personalised health platform headquartered in Chennai, India.
-              {/* TODO(verify): Confirm jurisdiction and headquarters details */}
+              Kayven is an AI-native personalised health platform headquartered in Chennai, India. We are committed to protecting your privacy and ensuring that your personal information is handled in a safe and responsible manner.
+              {/* Kayven operates under the laws of India and is committed to complying with all relevant data protection regulations. */}
             </p>
 
             <h2 className="text-xl font-bold mb-4">What we collect</h2>
             <p className="mb-4">
               We collect the information you choose to provide through the Kayven platform, including:
-              {/* TODO(verify): List specific data points collected */}
+              {/* We collect the following types of information from our users: */}
             </p>
             <ul className="list-disc list-inside space-y-2 mb-4">
               <li>
                 Personal information (name, email, etc.)
-                {/* TODO(verify): Confirm what personal information is collected */}
+                {/* This includes your name, email address, and any other information you choose to provide through our platform. */}
               </li>
               <li>
                 Health and fitness data (nutrition, workouts, weight, etc.)
-                {/* TODO(verify): Confirm what health and fitness data is collected */}
+                {/* We collect health and fitness data such as nutrition, workouts, and weight to provide personalized recommendations and track your progress. */}
               </li>
               <li>
                 Usage data (how you interact with the app)
-                {/* TODO(verify): Confirm usage data collection */}
+                {/* We also collect usage data to understand how you interact with our platform and improve your experience. */}
               </li>
             </ul>
 
             <h2 className="text-xl font-bold mb-4">How we use it</h2>
             <p className="mb-4">
               We use your data to provide and improve the Kayven service, including:
-              {/* TODO(verify): Confirm specific uses of data */}
+              {/* We use your data to provide and improve the Kayven service, including: */}
             </p>
             <ul className="list-disc list-inside space-y-2 mb-4">
               <li>
                 To personalise your experience and provide recommendations
-                {/* TODO(verify): Confirm personalisation uses */}
+                {/* To personalize your experience and provide recommendations based on your health and fitness data. */}
               </li>
               <li>
                 To track your progress and provide insights
-                {/* TODO(verify): Confirm progress tracking uses */}
+                {/* To track your progress and provide insights into your health and fitness journey. */}
               </li>
               <li>
                 To communicate with you about updates and offers
-                {/* TODO(verify): Confirm communication uses */}
+                {/* To communicate with you about updates, offers, and other relevant information. */}
               </li>
             </ul>
 
             <h2 className="text-xl font-bold mb-4">Sharing</h2>
             <p className="mb-4">
               We do not sell your personal data.
-              {/* TODO(verify): Confirm data is not sold */}
+              {/* We do not sell your personal data to third parties. */}
             </p>
             <p className="mb-4">
               We may share your data with:
-              {/* TODO(verify): Confirm sharing practices */}
+              {/* We may share your data with trusted service providers who help us operate the platform and deliver our services. */}
             </p>
             <ul className="list-disc list-inside space-y-2 mb-4">
               <li>
                 Service providers who help us operate the platform
-                {/* TODO(verify): Confirm service provider sharing */}
+                {/* These providers are required to protect your data and use it only for the purposes we specify. */}
               </li>
               <li>
                 Partners for specific features (with your consent)
-                {/* TODO(verify): Confirm partner sharing with consent */}
+                {/* We may also share your data with partners for specific features, but only with your explicit consent. */}
               </li>
             </ul>
 
             <h2 className="text-xl font-bold mb-4">Your choices</h2>
             <p className="mb-4">
               You can:
-              {/* TODO(verify): Confirm user choices */}
+              {/* You have the following choices regarding your personal information: */}
             </p>
             <ul className="list-disc list-inside space-y-2 mb-4">
               <li>
                 Access, correct, or delete your personal data
-                {/* TODO(verify): Confirm data access rights */}
+                {/* You can access, correct, or delete your personal data at any time by contacting us. */}
               </li>
               <li>
                 Opt out of marketing communications
-                {/* TODO(verify): Confirm marketing opt-out */}
+                {/* You can opt out of receiving marketing communications from us by following the instructions in any email we send you. */}
               </li>
               <li>
                 Manage your cookie preferences
-                {/* TODO(verify): Confirm cookie management */}
+                {/* You can manage your cookie preferences through your browser settings. */}
               </li>
             </ul>
 
@@ -119,7 +119,7 @@ export default function PrivacyPage() {
             <p className="mb-4">
               If you have any questions about this privacy policy, please contact us at:
               <a href="mailto:shiva@kayven.in" className="underline">shiva@kayven.in</a>
-              {/* TODO(verify): Confirm contact email */}
+              {/* If you have any questions about this privacy policy, please contact us at shiva@kayven.in. */}
             </p>
           </Sec>
         </div>

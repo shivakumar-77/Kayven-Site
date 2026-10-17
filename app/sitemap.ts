@@ -16,7 +16,6 @@ export default function Sitemap() {
     "product",
     "team",
     "contact",
-    "get-started",
     "insights",
     "refund",
     "privacy",

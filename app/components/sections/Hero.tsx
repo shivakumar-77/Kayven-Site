@@ -1,3 +1,4 @@
+"use client";
 import { useState } from "react";
 import { SITE_URL, EMAIL, SIGNUP_URL, socials } from "@/lib/site";
 import Sec from "@/app/components/Sec";

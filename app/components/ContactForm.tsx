@@ -1,313 +1,403 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { SITE_URL, EMAIL, socials } from "@/lib/site";
-import LinkedInIcon from "../components/LinkedInIcon";
-import InstagramIcon from "../components/InstagramIcon";
-import EmailIcon from "../components/EmailIcon";
+import { useEffect, useRef, useState } from "react";
+import { CONTACT_REASONS, type ContactReason } from "@/lib/contact";
+import { EMAIL } from "@/lib/site";
 
-type FormData = {
+interface ContactFormProps {
+  initialReasons?: ContactReason[];
+}
+
+type FormState = {
   name: string;
   email: string;
   company: string;
-  reason: string;
+  reason: ContactReason[];
   message: string;
+  website: string;
 };
 
-interface ContactFormProps {
-  initialReason?: string;
-}
+type FormErrors = Partial<Record<"name" | "email" | "reason" | "message", string>>;
 
-export default function ContactForm({ initialReason }: ContactFormProps) {
-  const [formData, setFormData] = useState<FormData>({
+const inputClassName =
+  "mt-2 min-h-12 w-full rounded-xl border border-[#d8dfd9] bg-white px-4 py-3 text-base text-[#18211d] placeholder:text-[#737d77] transition-colors focus:border-[#315d4e] focus:outline-none focus:ring-2 focus:ring-[#315d4e]/20";
+
+export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
+  const [formData, setFormData] = useState<FormState>({
     name: "",
     email: "",
     company: "",
-    reason: "",
+    reason: initialReasons,
     message: "",
+    website: "",
   });
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<FormErrors>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [emailOpened, setEmailOpened] = useState(false);
+  const [submitError, setSubmitError] = useState("");
+  const [submitted, setSubmitted] = useState(false);
+  const [showErrorSummary, setShowErrorSummary] = useState(false);
+  const errorSummaryRef = useRef<HTMLDivElement>(null);
 
-  // Handle input change
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    // Clear error for this field when user types
-    if (errors[name]) {
-      setErrors(prev => {
-        const newErrors = { ...prev };
-        delete newErrors[name];
-        return newErrors;
+  useEffect(() => {
+    if (showErrorSummary) {
+      errorSummaryRef.current?.focus();
+    }
+  }, [showErrorSummary]);
+
+  const validate = () => {
+    const nextErrors: FormErrors = {};
+
+    if (!formData.name.trim()) {
+      nextErrors.name = "Please enter your name.";
+    } else if (formData.name.trim().length > 100) {
+      nextErrors.name = "Your name must be 100 characters or fewer.";
+    }
+
+    if (!formData.email.trim()) {
+      nextErrors.email = "Please enter your email address.";
+    } else if (
+      formData.email.length > 254 ||
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email.trim())
+    ) {
+      nextErrors.email = "Enter a valid email address.";
+    }
+
+    if (formData.reason.length === 0) {
+      nextErrors.reason = "Choose at least one topic.";
+    }
+
+    if (!formData.message.trim()) {
+      nextErrors.message = "Please add a message.";
+    } else if (formData.message.trim().length < 10) {
+      nextErrors.message = "Please add a little more detail (at least 10 characters).";
+    } else if (formData.message.length > 5000) {
+      nextErrors.message = "Your message must be 5,000 characters or fewer.";
+    }
+
+    setErrors(nextErrors);
+    return Object.keys(nextErrors).length === 0;
+  };
+
+  const updateField = (
+    field: "name" | "email" | "company" | "message",
+    value: string,
+  ) => {
+    setFormData((current) => ({ ...current, [field]: value }));
+    setSubmitted(false);
+    setSubmitError("");
+    setShowErrorSummary(false);
+    if (field === "name" || field === "email" || field === "message") {
+      setErrors((current) => {
+        const next = { ...current };
+        delete next[field];
+        return next;
       });
     }
   };
 
-  // Categories for the button group
-  const categories = [
-    { id: "general", label: "General enquiries" },
-    { id: "product", label: "Product feedback" },
-    { id: "partnership", label: "Partnerships" },
-    { id: "media", label: "Media" },
-    { id: "investor", label: "Investors" },
-    { id: "careers", label: "Careers" },
-    { id: "get-started", label: "Get started" },
-  ];
-
-  // Initialize reason from URL query parameter (passed as prop)
-  useEffect(() => {
-    if (initialReason) {
-      setFormData(prev => ({ ...prev, reason: initialReason }));
-    }
-  }, [initialReason]);
-
-  // Handle category button click
-  const handleCategoryClick = (categoryId: string) => {
-    setFormData(prev => ({ ...prev, reason: categoryId }));
+  const toggleReason = (reason: ContactReason) => {
+    setFormData((current) => ({
+      ...current,
+      reason: current.reason.includes(reason)
+        ? current.reason.filter((selected) => selected !== reason)
+        : [...current.reason, reason],
+    }));
+    setSubmitted(false);
+    setSubmitError("");
+    setShowErrorSummary(false);
+    setErrors((current) => ({ ...current, reason: undefined }));
   };
 
-  // Validate form
-  const validateForm = () => {
-    const newErrors: Record<string, string> = {};
-    if (!formData.name.trim()) {
-      newErrors.name = "Name is required";
-    }
-    if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
-    } else if (!/\S+@\S+\.\S+/.test(formData.email)) {
-      newErrors.email = "Email address is invalid";
-    }
-    if (!formData.reason) {
-      newErrors.reason = "Please select a reason";
-    }
-    if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
-  };
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setSubmitError("");
+    setSubmitted(false);
 
-  // Handle submit
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (validateForm()) {
-      setIsSubmitting(true);
-      // Build mailto URL
-      const subject = `[${formData.reason}] ${formData.name}`;
-      const body = `
-	Name: ${formData.name}
-	Email: ${formData.email}
-	Company: ${formData.company || "Not provided"}
-	Reason: ${formData.reason}
-	Message: ${formData.message}
-      `.trim();
-      const mailtoUrl = `mailto:${EMAIL}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (!validate()) {
+      setShowErrorSummary(true);
+      return;
+    }
 
-      // Open email client
-      window.location.href = mailtoUrl;
+    setShowErrorSummary(false);
+    setIsSubmitting(true);
 
-      // Show confirmation message (we'll show after a delay, but we can also show immediately)
-      setEmailOpened(true);
-      // Note: We cannot know if the email client actually opened, but we show the message anyway.
+    try {
+      const response = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(formData),
+      });
+      const result: unknown = await response.json();
+      const message =
+        typeof result === "object" &&
+        result !== null &&
+        "error" in result &&
+        typeof result.error === "string"
+          ? result.error
+          : "We couldn't send your message. Please email us directly.";
+
+      if (!response.ok) {
+        setSubmitError(message);
+        return;
+      }
+
+      setFormData((current) => ({
+        ...current,
+        name: "",
+        email: "",
+        company: "",
+        message: "",
+        website: "",
+      }));
+      setErrors({});
+      setSubmitted(true);
+    } catch {
+      setSubmitError(
+        "We couldn't connect to send your message. Please try again or email us directly.",
+      );
+    } finally {
       setIsSubmitting(false);
     }
   };
 
   return (
-    <>
-      {/* Left Column */}
-      <div className="space-y-6">
-        {/* Categories */}
-        <div className="space-y-4">
-          <p className="font-semibold mb-2">Reason for contacting</p>
-          <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-4">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => handleCategoryClick(category.id)}
-                aria-pressed={formData.reason === category.id ? "true" : "false"}
-                className={`${formData.reason === category.id ? "bg-black text-white" : "border border-black hover:bg-black hover:text-white"} px-4 py-2 rounded text-sm transition-colors`}
-              >
-                {category.label}
-              </button>
-            ))}
-          </div>
+    <form
+      onSubmit={handleSubmit}
+      noValidate
+      className="rounded-[1.75rem] border border-[#e2e7e2] bg-white p-6 shadow-[0_22px_70px_-48px_rgba(18,43,34,0.35)] sm:p-8 lg:p-10"
+    >
+      <div className="mb-8">
+        <p className="lbl mb-3 text-[#52725f]">Your message</p>
+        <h2 className="text-3xl text-[#17221d] sm:text-4xl">Send us a note</h2>
+        <p className="mt-4 text-base leading-7 text-[#56615a]">
+          Tell us what you have in mind and we&apos;ll get back to you by email.
+        </p>
+      </div>
+
+      {showErrorSummary && Object.keys(errors).length > 0 && (
+        <div
+          aria-labelledby="contact-error-heading"
+          className="mb-6 rounded-xl border border-[#e6c4bd] bg-[#fff5f2] p-4 text-sm text-[#7c3026]"
+          ref={errorSummaryRef}
+          role="alert"
+          tabIndex={-1}
+        >
+          <p className="font-semibold" id="contact-error-heading">
+            Please check these details:
+          </p>
+          <ul className="mt-2 list-inside list-disc space-y-1">
+            {Object.entries(errors).map(([field, error]) => {
+              const fieldId =
+                field === "reason" ? "contact-reasons" : `contact-${field}`;
+
+              return (
+                <li key={field}>
+                  <a className="underline underline-offset-2" href={`#${fieldId}`}>
+                    {error}
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+
+      <div className="grid gap-x-5 gap-y-6 sm:grid-cols-2">
+        <div>
+          <label htmlFor="contact-name" className="text-sm font-semibold text-[#202a24]">
+            Your name <span aria-hidden="true" className="text-[#a13f32]">*</span>
+          </label>
+          <input
+            autoComplete="name"
+            className={inputClassName}
+            id="contact-name"
+            maxLength={100}
+            name="name"
+            onChange={(event) => updateField("name", event.target.value)}
+            aria-describedby={errors.name ? "contact-name-error" : undefined}
+            aria-invalid={Boolean(errors.name)}
+            required
+            value={formData.name}
+          />
+          {errors.name && (
+            <p className="mt-2 text-sm text-[#a13f32]" id="contact-name-error">
+              {errors.name}
+            </p>
+          )}
         </div>
 
-        {/* Email */}
-        <div className="space-y-2">
-          <p className="font-semibold mb-2">Email</p>
-          <a
-            href={`mailto:${EMAIL}`}
-            className="flex items-center space-x-2 text-black hover:underline"
-          >
-            <EmailIcon className="w-5 h-5" />
-            <span>{EMAIL}</span>
-          </a>
+        <div>
+          <label htmlFor="contact-email" className="text-sm font-semibold text-[#202a24]">
+            Email address <span aria-hidden="true" className="text-[#a13f32]">*</span>
+          </label>
+          <input
+            autoComplete="email"
+            className={inputClassName}
+            id="contact-email"
+            maxLength={254}
+            name="email"
+            onChange={(event) => updateField("email", event.target.value)}
+            aria-describedby={errors.email ? "contact-email-error" : undefined}
+            aria-invalid={Boolean(errors.email)}
+            required
+            type="email"
+            value={formData.email}
+          />
+          {errors.email && (
+            <p className="mt-2 text-sm text-[#a13f32]" id="contact-email-error">
+              {errors.email}
+            </p>
+          )}
         </div>
 
-        {/* Company Social Links */}
-        <div className="space-y-2">
-          <p className="font-semibold mb-2">Follow Kayven</p>
-          <div className="flex space-x-4">
-            <a
-              href={socials.company.linkedIn}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Opens Kayven's LinkedIn in a new tab"
-              className="flex items-center space-x-2 text-black hover:underline"
-            >
-              <LinkedInIcon className="w-5 h-5" />
-              <span>LinkedIn</span>
-            </a>
-            <a
-              href={socials.company.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Opens Kayven's Instagram in a new tab"
-              className="flex items-center space-x-2 text-black hover:underline"
-            >
-              <InstagramIcon className="w-5 h-5" />
-              <span>Instagram</span>
-            </a>
-            <a
-              href={socials.company.x}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Opens Kayven's X (Twitter) in a new tab"
-              className="flex items-center space-x-2 text-black hover:underline"
-            >
-              {/* We don't have an X icon component, but we can use a placeholder or just text. For now, we'll use text. */}
-              <span className="flex items-center space-x-2">
-                {/* We'll use an X icon if we have one, but we don't. Let's just use text for now. */}
-                X
-              </span>
-            </a>
+        <div className="sm:col-span-2">
+          <label htmlFor="contact-company" className="text-sm font-semibold text-[#202a24]">
+            Company <span className="font-normal text-[#737d77]">(optional)</span>
+          </label>
+          <input
+            autoComplete="organization"
+            className={inputClassName}
+            id="contact-company"
+            maxLength={120}
+            name="company"
+            onChange={(event) => updateField("company", event.target.value)}
+            value={formData.company}
+          />
+        </div>
+
+        <fieldset
+          aria-describedby={errors.reason ? "contact-reason-error" : undefined}
+          aria-invalid={Boolean(errors.reason)}
+          className="sm:col-span-2"
+          id="contact-reasons"
+        >
+          <legend className="text-sm font-semibold text-[#202a24]">
+            What would you like to talk about?{" "}
+            <span aria-hidden="true" className="text-[#a13f32]">*</span>
+          </legend>
+          <div className="mt-3 flex flex-wrap gap-2">
+            {CONTACT_REASONS.map((reason) => {
+              const checked = formData.reason.includes(reason.id);
+
+              return (
+                <label
+                  key={reason.id}
+                  className={`inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors ${
+                    checked
+                      ? "border-[#315d4e] bg-[#e8f0e9] text-[#234838]"
+                      : "border-[#d8dfd9] bg-white text-[#39443d] hover:border-[#789180]"
+                  }`}
+                >
+                  <input
+                    checked={checked}
+                    className="h-4 w-4 accent-[#315d4e]"
+                    onChange={() => toggleReason(reason.id)}
+                    type="checkbox"
+                  />
+                  {reason.label}
+                </label>
+              );
+            })}
           </div>
+          {errors.reason && (
+            <p className="mt-2 text-sm text-[#a13f32]" id="contact-reason-error">
+              {errors.reason}
+            </p>
+          )}
+        </fieldset>
+
+        <div className="sm:col-span-2">
+          <label htmlFor="contact-message" className="text-sm font-semibold text-[#202a24]">
+            Your message <span aria-hidden="true" className="text-[#a13f32]">*</span>
+          </label>
+          <textarea
+            className={`${inputClassName} min-h-36 resize-y`}
+            id="contact-message"
+            maxLength={5000}
+            name="message"
+            onChange={(event) => updateField("message", event.target.value)}
+            aria-describedby={errors.message ? "contact-message-error" : "contact-message-hint"}
+            aria-invalid={Boolean(errors.message)}
+            required
+            value={formData.message}
+          />
+          {errors.message ? (
+            <p className="mt-2 text-sm text-[#a13f32]" id="contact-message-error">
+              {errors.message}
+            </p>
+          ) : (
+            <p className="mt-2 text-sm text-[#737d77]" id="contact-message-hint">
+              A little context helps us get back to you with a useful answer.
+            </p>
+          )}
         </div>
       </div>
 
-      {/* Right Column: Form */}
-      <div>
-        <form onSubmit={handleSubmit} className="space-y-6">
-          <div className="space-y-2">
-            <label htmlFor="name" className="lbl">
-              Name
-              <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="text"
-              id="name"
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              className={`border-b-2 border-black focus:border-b-4 focus:border-black px-2 py-2 w-full ${errors.name ? "border-red-500" : ""}`}
-              required
-            />
-            {errors.name && (
-              <p className="mt-1 text-sm text-red-500">{errors.name}</p>
-            )}
-          </div>
+      <div
+        aria-hidden="true"
+        className="absolute left-[-10000px] top-auto h-px w-px overflow-hidden"
+      >
+        <label htmlFor="contact-website">Leave this field empty</label>
+        <input
+          autoComplete="off"
+          id="contact-website"
+          name="website"
+          onChange={(event) =>
+            setFormData((current) => ({ ...current, website: event.target.value }))
+          }
+          tabIndex={-1}
+          value={formData.website}
+        />
+      </div>
 
-          <div className="space-y-2">
-            <label htmlFor="email" className="lbl">
-              Email
-              <span className="text-red-500">*</span>
-            </label>
-            <input
-              type="email"
-              id="email"
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className={`border-b-2 border-black focus:border-b-4 focus:border-black px-2 py-2 w-full ${errors.email ? "border-red-500" : ""}`}
-              required
-            />
-            {errors.email && (
-              <p className="mt-1 text-sm text-red-500">{errors.email}</p>
-            )}
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="company" className="lbl">
-              Company (optional)
-            </label>
-            <input
-              type="text"
-              id="company"
-              name="company"
-              value={formData.company}
-              onChange={handleChange}
-              className="border-b-2 border-black focus:border-b-4 focus:border-black px-2 py-2 w-full"
-            />
-          </div>
-
-          <div className="space-y-2">
-            <label htmlFor="reason" className="lbl">
-              Reason
-              <span className="text-red-500">*</span>
-            </label>
-            <select
-              id="reason"
-              name="reason"
-              value={formData.reason}
-              onChange={handleChange}
-              className={`border-b-2 border-black focus:border-b-4 focus:border-black px-2 py-2 w-full ${errors.reason ? "border-red-500" : ""}`}
-              disabled
+      <div className="mt-7">
+        <button
+          aria-busy={isSubmitting}
+          className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-[#193d34] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#285447] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#315d4e] disabled:cursor-wait disabled:opacity-60 sm:w-auto"
+          disabled={isSubmitting}
+          type="submit"
+        >
+          {isSubmitting ? "Sending your message…" : "Send message"}
+          {!isSubmitting && (
+            <svg
+              aria-hidden="true"
+              className="h-4 w-4"
+              fill="none"
+              viewBox="0 0 20 20"
             >
-              <option value="">Select a reason</option>
-              {categories.map((category) => (
-                <option key={category.id} value={category.id}>
-                  {category.label}
-                </option>
-              ))}
-            </select>
-            {errors.reason && (
-              <p className="mt-1 text-sm text-red-500">{errors.reason}</p>
-            )}
-          </div>
+              <path
+                d="M3.5 10h12m-5-5 5 5-5 5"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="1.5"
+              />
+            </svg>
+          )}
+        </button>
+        <p className="mt-3 text-sm text-[#737d77]">
+          Your details are only used to respond to your enquiry.
+        </p>
+      </div>
 
-          <div className="space-y-2">
-            <label htmlFor="message" className="lbl">
-              Message
-              <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              id="message"
-              name="message"
-              value={formData.message}
-              onChange={handleChange}
-              className={`border-b-2 border-black focus:border-b-4 focus:border-black px-2 py-2 w-full h-24 ${errors.message ? "border-red-500" : ""}`}
-              required
-            />
-            {errors.message && (
-              <p className="mt-1 text-sm text-red-500">{errors.message}</p>
-            )}
-          </div>
-
-          <button
-            type="submit"
-            disabled={isSubmitting}
-            className={`btn-primary w-full py-3 ${isSubmitting ? "opacity-50 cursor-not-allowed" : ""}`}
-          >
-            {isSubmitting ? "Sending..." : "Send Message"}
-          </button>
-        </form>
-
-        {/* Email confirmation message */}
-        {emailOpened && (
-          <div className="mt-6 p-4 bg-black/5 rounded-lg">
-            <p className="text-white">
-              Your email app should open. If it does not, write to{" "}
-              <a href={`mailto:${EMAIL}`} className="underline">
-                {EMAIL}
-              </a>
-              .
-            </p>
-          </div>
+      <div aria-live="polite" className="mt-5" role="status">
+        {submitted && (
+          <p className="rounded-xl border border-[#b8d5c0] bg-[#eff7f0] px-4 py-3 text-sm leading-6 text-[#234838]">
+            Thanks — your message has been sent to the Kayven team.
+          </p>
         )}
       </div>
-    </>
+      {submitError && (
+        <div
+          className="mt-5 rounded-xl border border-[#e6c4bd] bg-[#fff5f2] px-4 py-3 text-sm leading-6 text-[#7c3026]"
+          role="alert"
+        >
+          <p>{submitError}</p>
+          <a className="mt-1 inline-block font-semibold underline" href={`mailto:${EMAIL}`}>
+            Email us directly at {EMAIL}
+          </a>
+        </div>
+      )}
+    </form>
   );
 }

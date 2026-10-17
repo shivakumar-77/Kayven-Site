@@ -148,6 +148,7 @@ export const getIndiaEffectiveMonthly = (yearlyPrice: number | string): string =
 
 // Get effective monthly price for Global
 export const getGlobalEffectiveMonthly = (yearlyPrice: number | string): string => {
-  const effective = calculateEffectiveMonthly(yearlyPrice);
-  return formatGlobalPrice(effective);
+  const numericPrice = typeof yearlyPrice === 'string' ? parseFloat(yearlyPrice) : yearlyPrice;
+  const effectiveMonthly = Math.round((numericPrice / 12) * 100) / 100;
+  return formatGlobalPrice(effectiveMonthly);
 };

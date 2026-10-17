@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SIGNUP_URL } from "@/lib/site";
 import {
   plans,
@@ -18,8 +18,28 @@ interface PricingProps {
 }
 
 export default function Pricing({ variant = "page" }: PricingProps) {
+  const getCookie = (name: string): string | null => {
+    if (typeof window === 'undefined') return null;
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop()?.split(';').shift() || null;
+    return null;
+  };
+
   const [region, setRegion] = useState<"India" | "Global">("India");
   const [billing, setBilling] = useState<"Monthly" | "Yearly">("Monthly");
+
+  // Read cookies on client to initialize state
+  useEffect(() => {
+    const cookieRegion = getCookie('region');
+    const cookieBilling = getCookie('billing');
+    if (cookieRegion) {
+      setRegion(cookieRegion.toLowerCase() === 'global' ? 'Global' : 'India');
+    }
+    if (cookieBilling) {
+      setBilling(cookieBilling.toLowerCase() === 'yearly' ? 'Yearly' : 'Monthly');
+    }
+  }, []);
 
   // Get current prices based on region and billing
   const currentPrices = pricingData.prices[region][billing];
@@ -67,7 +87,7 @@ export default function Pricing({ variant = "page" }: PricingProps) {
                 onClick={() => setRegion(r)}
               >
                 {r}
-                {r === "India" && billing === "Yearly" && (
+                {r === "India" && region === "India" && billing === "Yearly" && (
                   <span className="ml-1 lbl text-xs uppercase tracking-tight border border-solid border-currentColor px-2 py-0.5 m-0">
                     Save up to {maxDiscount}%
                   </span>
@@ -114,7 +134,7 @@ export default function Pricing({ variant = "page" }: PricingProps) {
                 onClick={() => setRegion(r)}
               >
                 {r}
-                {r === "India" && billing === "Yearly" && (
+                {r === "India" && region === "India" && billing === "Yearly" && (
                   <span className="ml-1 lbl text-xs uppercase tracking-tight border border-solid border-currentColor px-2 py-0.5 m-0">
                     Save up to {maxDiscount}%
                   </span>

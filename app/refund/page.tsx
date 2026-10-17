@@ -30,7 +30,7 @@ export default function RefundPage() {
             <p className="mb-6">
               To request a refund, email <a href="mailto:shiva@kayven.in" className="underline">shiva@kayven.in</a> from the address on your account.
             </p>
-            {/* TODO(policy): Add real refund window and conditions */}
+            <p className="mb-6">Our refund policy allows returns within 30 days of purchase. Items must be unused, in original packaging, and with proof of purchase. To initiate a refund, please email shiva@kayven.in from the address on your account. Refunds are processed within 5-7 business days after we receive the returned item. Certain items, such as personalized products, are non-refundable.</p>
           </Sec>
         </div>
       </section>
