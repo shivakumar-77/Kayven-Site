@@ -183,7 +183,7 @@ export default function PricingSection() {
             return (
               <motion.div
                 key={plan.name}
-                className={`min-w-0 min-w-[300px] flex flex-col h-full border-2 border-black p-6 md:p-8
+                className={`min-w-0 flex flex-col h-full border-2 border-black p-6 md:p-8
                   ${isStandard
                     ? 'dark bg-black text-white lg:-my-6 lg:py-12'
                     : 'bg-white hover:bg-black hover:text-white hover:border-4 transition-colors duration-100'}
@@ -300,7 +300,7 @@ export default function PricingSection() {
 
                 {/* Get Started button */}
                 <motion.a
-                  href="/"
+                  href={SIGNUP_URL}
                   className={`btn w-full justify-between mt-auto
                     ${isStandard
                       ? 'bg-white text-black'

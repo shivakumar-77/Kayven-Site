@@ -26,22 +26,22 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
   const initialReasons = [...new Set(requestedReasons.filter(isContactReason))];
 
   return (
-    <main className="overflow-hidden bg-[#f4f6f2] text-[#18211d]">
+    <main className="overflow-hidden bg-[#fafafd] text-[#151526]">
       <section className="relative">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute right-0 -top-24 h-80 w-80 rounded-full bg-[#dfe9df] blur-3xl"
+          className="pointer-events-none absolute right-0 -top-24 h-80 w-80 rounded-full bg-[#efeeff] blur-3xl"
         />
         <div className="relative mx-auto max-w-6xl px-5 pb-12 pt-16 sm:px-8 sm:pt-20 lg:px-12 lg:pb-16 lg:pt-24">
-          <p className="lbl mb-5 flex items-center gap-3 text-[#52725f]">
-            <span aria-hidden="true" className="h-px w-8 bg-[#52725f]" />
+          <p className="lbl mb-5 flex items-center gap-3 text-[#4543dd]">
+            <span aria-hidden="true" className="h-px w-8 bg-[#4543dd]" />
             Contact Kayven
           </p>
-          <h1 className="max-w-4xl text-[clamp(3rem,8vw,6rem)] leading-[0.98] text-[#17221d]">
+          <h1 className="max-w-4xl text-[clamp(3rem,8vw,6rem)] leading-[0.98] text-[#151526]">
             Let&apos;s make a healthier future,{" "}
-            <span className="text-[#52725f]">together.</span>
+            <span className="text-[#4543dd]">together.</span>
           </h1>
-          <p className="mt-7 max-w-2xl text-lg leading-8 text-[#56615a] sm:text-xl">
+          <p className="mt-7 max-w-2xl text-lg leading-8 text-[#68687d] sm:text-xl">
             Have a question, an idea, or a partnership in mind? Leave us a note
             and the Kayven team will be in touch.
           </p>
@@ -53,20 +53,20 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
         className="relative pb-20 sm:pb-24"
       >
         <div className="mx-auto grid max-w-6xl gap-6 px-5 sm:px-8 lg:grid-cols-[0.82fr_1.18fr] lg:gap-8 lg:px-12">
-          <aside className="flex flex-col justify-between rounded-[1.75rem] bg-[#193d34] p-7 text-white sm:p-9 lg:p-10">
+          <aside className="flex flex-col justify-between rounded-[1.75rem] bg-[#302da8] p-7 text-white sm:p-9 lg:p-10">
             <div>
-              <p className="lbl text-[#c3d7c9]">We&apos;re listening</p>
+              <p className="lbl text-[#efeeff]">We&apos;re listening</p>
               <h2 className="mt-5 max-w-sm text-3xl leading-tight text-white sm:text-4xl">
                 Good things start with a conversation.
               </h2>
-              <p className="mt-5 max-w-sm text-base leading-7 text-[#e0e9e2]">
+              <p               className="mt-5 max-w-sm text-base leading-7 text-[#efeeff]">
                 Whether you&apos;re exploring Kayven, sharing feedback, or
                 looking to work together, we&apos;d love to hear from you.
               </p>
             </div>
 
             <div className="mt-10 border-t border-white/20 pt-7">
-              <p className="lbl mb-3 text-[#c3d7c9]">Prefer email?</p>
+              <p className="lbl mb-3 text-[#efeeff]">Prefer email?</p>
               <a
                 className="inline-flex min-h-11 max-w-full items-center gap-3 text-lg font-medium text-white underline decoration-white/40 underline-offset-4 transition-colors hover:decoration-white"
                 href={`mailto:${EMAIL}`}
@@ -78,11 +78,11 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
               </a>
 
               <div className="mt-8">
-                <p className="lbl mb-3 text-[#c3d7c9]">Follow along</p>
+                <p className="lbl mb-3 text-[#efeeff]">Follow along</p>
                 <nav aria-label="Kayven social media" className="flex flex-wrap gap-3">
                   <a
                     aria-label="Kayven on LinkedIn (opens in a new tab)"
-                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/35 text-white transition-colors hover:border-white hover:bg-white hover:text-[#193d34] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/35 text-white transition-colors hover:border-white hover:bg-white hover:text-[#302da8] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                     href={socials.company.linkedIn}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -94,7 +94,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </a>
                   <a
                     aria-label="Kayven on Instagram (opens in a new tab)"
-                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/35 text-white transition-colors hover:border-white hover:bg-white hover:text-[#193d34] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/35 text-white transition-colors hover:border-white hover:bg-white hover:text-[#302da8] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                     href={socials.company.instagram}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -106,7 +106,7 @@ export default async function ContactPage({ searchParams }: ContactPageProps) {
                   </a>
                   <a
                     aria-label="Kayven on X (opens in a new tab)"
-                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/35 text-white transition-colors hover:border-white hover:bg-white hover:text-[#193d34] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+                    className="flex h-12 w-12 items-center justify-center rounded-full border border-white/35 text-white transition-colors hover:border-white hover:bg-white hover:text-[#302da8] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
                     href={socials.company.x}
                     rel="noopener noreferrer"
                     target="_blank"

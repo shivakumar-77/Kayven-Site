@@ -24,11 +24,11 @@ const pricingFAQ = [
   },
   {
     question: "Can I cancel anytime?",
-    answer: "Yes. Subscriptions renew according to your selected billing period unless cancelled."
+    answer: "Renewal and cancellation details depend on the plan and purchase flow. Review the terms shown before subscribing, or contact us for help."
   },
   {
     question: "Can I get a refund?",
-    answer: "To ask about a refund, email shiva@kayven.in from the address on your account. {/* TODO(policy): replace with the real policy */}"
+    answer: "For billing or refund questions, contact us from the email address associated with your purchase. Eligibility depends on the terms shown at purchase and applicable requirements."
   },
   {
     question: "Is Kayven a medical app?",

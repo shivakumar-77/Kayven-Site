@@ -3,6 +3,7 @@ import CtaBand from "../components/CtaBand";
 import Sec from "../components/Sec";
 import { SITE_URL, EMAIL, SIGNUP_URL, socials } from "@/lib/site";
 import { motion } from "framer-motion";
+import VoiceCoachDemo from "../components/ai/VoiceCoachDemo";
 
 // Metadata for the AI page
 export const metadata = {
@@ -78,13 +79,22 @@ export default function AIPage() {
         intro="Kayven connects the information you choose to track with your goals and progress, helping turn daily health data into more relevant insights and recommendations."
       />
 
+      <Sec
+        id="voice-demo"
+        n="01"
+        label="Interactive preview"
+        title="A voice interface, on your terms."
+      >
+        <VoiceCoachDemo />
+      </Sec>
+
       {/* Content Sections */}
       <section className="pb-20">
         {aiSections.map((section, index) => (
           <Sec
             key={section.id}
             id={section.id}
-            n={String(index + 1).padStart(2, '0')}
+            n={String(index + 2).padStart(2, '0')}
             label={section.label.replace(/-/g, ' ').toUpperCase()}
             title={section.title}
           >

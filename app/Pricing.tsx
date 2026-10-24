@@ -294,7 +294,7 @@ export default function Pricing({ variant = "page" }: PricingProps) {
 
                 {/* Get Started button */}
                 <motion.a
-                  href="/subscription"
+                  href={SIGNUP_URL}
                   className={`btn w-full justify-between mt-auto
                     ${isStandard
                       ? 'bg-white text-black'

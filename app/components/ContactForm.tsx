@@ -20,7 +20,7 @@ type FormState = {
 type FormErrors = Partial<Record<"name" | "email" | "reason" | "message", string>>;
 
 const inputClassName =
-  "mt-2 min-h-12 w-full rounded-xl border border-[#d8dfd9] bg-white px-4 py-3 text-base text-[#18211d] placeholder:text-[#737d77] transition-colors focus:border-[#315d4e] focus:outline-none focus:ring-2 focus:ring-[#315d4e]/20";
+  "mt-2 min-h-12 w-full rounded-xl border border-[#e8e7f0] bg-white px-4 py-3 text-base text-[#151526] placeholder:text-[#68687d] transition-colors focus:border-[#4543dd] focus:outline-none focus:ring-2 focus:ring-[#4543dd]/20";
 
 export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
   const [formData, setFormData] = useState<FormState>({
@@ -164,12 +164,12 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
     <form
       onSubmit={handleSubmit}
       noValidate
-      className="rounded-[1.75rem] border border-[#e2e7e2] bg-white p-6 shadow-[0_22px_70px_-48px_rgba(18,43,34,0.35)] sm:p-8 lg:p-10"
+      className="rounded-[1.75rem] border border-[#e8e7f0] bg-white p-6 shadow-[0_22px_70px_-48px_rgba(21,21,38,0.2)] sm:p-8 lg:p-10"
     >
       <div className="mb-8">
-        <p className="lbl mb-3 text-[#52725f]">Your message</p>
-        <h2 className="text-3xl text-[#17221d] sm:text-4xl">Send us a note</h2>
-        <p className="mt-4 text-base leading-7 text-[#56615a]">
+        <p className="lbl mb-3 text-[#4543dd]">Your message</p>
+        <h2 className="text-3xl text-[#151526] sm:text-4xl">Send us a note</h2>
+        <p className="mt-4 text-base leading-7 text-[#68687d]">
           Tell us what you have in mind and we&apos;ll get back to you by email.
         </p>
       </div>
@@ -177,7 +177,7 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
       {showErrorSummary && Object.keys(errors).length > 0 && (
         <div
           aria-labelledby="contact-error-heading"
-          className="mb-6 rounded-xl border border-[#e6c4bd] bg-[#fff5f2] p-4 text-sm text-[#7c3026]"
+          className="mb-6 rounded-xl border border-[#f0c7c2] bg-[#fff5f4] p-4 text-sm text-[#9b2119]"
           ref={errorSummaryRef}
           role="alert"
           tabIndex={-1}
@@ -204,8 +204,8 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
 
       <div className="grid gap-x-5 gap-y-6 sm:grid-cols-2">
         <div>
-          <label htmlFor="contact-name" className="text-sm font-semibold text-[#202a24]">
-            Your name <span aria-hidden="true" className="text-[#a13f32]">*</span>
+          <label htmlFor="contact-name" className="text-sm font-semibold text-[#151526]">
+            Your name <span aria-hidden="true" className="text-[#b42318]">*</span>
           </label>
           <input
             autoComplete="name"
@@ -220,15 +220,15 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
             value={formData.name}
           />
           {errors.name && (
-            <p className="mt-2 text-sm text-[#a13f32]" id="contact-name-error">
+            <p className="mt-2 text-sm text-[#b42318]" id="contact-name-error">
               {errors.name}
             </p>
           )}
         </div>
 
         <div>
-          <label htmlFor="contact-email" className="text-sm font-semibold text-[#202a24]">
-            Email address <span aria-hidden="true" className="text-[#a13f32]">*</span>
+          <label htmlFor="contact-email" className="text-sm font-semibold text-[#151526]">
+            Email address <span aria-hidden="true" className="text-[#b42318]">*</span>
           </label>
           <input
             autoComplete="email"
@@ -244,15 +244,15 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
             value={formData.email}
           />
           {errors.email && (
-            <p className="mt-2 text-sm text-[#a13f32]" id="contact-email-error">
+            <p className="mt-2 text-sm text-[#b42318]" id="contact-email-error">
               {errors.email}
             </p>
           )}
         </div>
 
         <div className="sm:col-span-2">
-          <label htmlFor="contact-company" className="text-sm font-semibold text-[#202a24]">
-            Company <span className="font-normal text-[#737d77]">(optional)</span>
+          <label htmlFor="contact-company" className="text-sm font-semibold text-[#151526]">
+            Company <span className="font-normal text-[#68687d]">(optional)</span>
           </label>
           <input
             autoComplete="organization"
@@ -271,9 +271,9 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
           className="sm:col-span-2"
           id="contact-reasons"
         >
-          <legend className="text-sm font-semibold text-[#202a24]">
+          <legend className="text-sm font-semibold text-[#151526]">
             What would you like to talk about?{" "}
-            <span aria-hidden="true" className="text-[#a13f32]">*</span>
+            <span aria-hidden="true" className="text-[#b42318]">*</span>
           </legend>
           <div className="mt-3 flex flex-wrap gap-2">
             {CONTACT_REASONS.map((reason) => {
@@ -284,13 +284,13 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
                   key={reason.id}
                   className={`inline-flex min-h-11 cursor-pointer items-center gap-2 rounded-full border px-4 py-2 text-sm transition-colors ${
                     checked
-                      ? "border-[#315d4e] bg-[#e8f0e9] text-[#234838]"
-                      : "border-[#d8dfd9] bg-white text-[#39443d] hover:border-[#789180]"
+                      ? "border-[#4543dd] bg-[#efeeff] text-[#302da8]"
+                      : "border-[#e8e7f0] bg-white text-[#151526] hover:border-[#4543dd]"
                   }`}
                 >
                   <input
                     checked={checked}
-                    className="h-4 w-4 accent-[#315d4e]"
+                    className="h-4 w-4 accent-[#4543dd]"
                     onChange={() => toggleReason(reason.id)}
                     type="checkbox"
                   />
@@ -300,15 +300,15 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
             })}
           </div>
           {errors.reason && (
-            <p className="mt-2 text-sm text-[#a13f32]" id="contact-reason-error">
+            <p className="mt-2 text-sm text-[#b42318]" id="contact-reason-error">
               {errors.reason}
             </p>
           )}
         </fieldset>
 
         <div className="sm:col-span-2">
-          <label htmlFor="contact-message" className="text-sm font-semibold text-[#202a24]">
-            Your message <span aria-hidden="true" className="text-[#a13f32]">*</span>
+          <label htmlFor="contact-message" className="text-sm font-semibold text-[#151526]">
+            Your message <span aria-hidden="true" className="text-[#b42318]">*</span>
           </label>
           <textarea
             className={`${inputClassName} min-h-36 resize-y`}
@@ -322,11 +322,11 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
             value={formData.message}
           />
           {errors.message ? (
-            <p className="mt-2 text-sm text-[#a13f32]" id="contact-message-error">
+            <p className="mt-2 text-sm text-[#b42318]" id="contact-message-error">
               {errors.message}
             </p>
           ) : (
-            <p className="mt-2 text-sm text-[#737d77]" id="contact-message-hint">
+            <p className="mt-2 text-sm text-[#68687d]" id="contact-message-hint">
               A little context helps us get back to you with a useful answer.
             </p>
           )}
@@ -353,7 +353,7 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
       <div className="mt-7">
         <button
           aria-busy={isSubmitting}
-          className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-[#193d34] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#285447] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#315d4e] disabled:cursor-wait disabled:opacity-60 sm:w-auto"
+          className="inline-flex min-h-12 w-full items-center justify-center gap-3 rounded-full bg-[#4543dd] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#302da8] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#4543dd] disabled:cursor-wait disabled:opacity-60 sm:w-auto"
           disabled={isSubmitting}
           type="submit"
         >
@@ -375,21 +375,21 @@ export default function ContactForm({ initialReasons = [] }: ContactFormProps) {
             </svg>
           )}
         </button>
-        <p className="mt-3 text-sm text-[#737d77]">
+        <p className="mt-3 text-sm text-[#68687d]">
           Your details are only used to respond to your enquiry.
         </p>
       </div>
 
       <div aria-live="polite" className="mt-5" role="status">
         {submitted && (
-          <p className="rounded-xl border border-[#b8d5c0] bg-[#eff7f0] px-4 py-3 text-sm leading-6 text-[#234838]">
+          <p className="rounded-xl border border-[#b8d5c0] bg-[#eff7f0] px-4 py-3 text-sm leading-6 text-[#176b45]">
             Thanks — your message has been sent to the Kayven team.
           </p>
         )}
       </div>
       {submitError && (
         <div
-          className="mt-5 rounded-xl border border-[#e6c4bd] bg-[#fff5f2] px-4 py-3 text-sm leading-6 text-[#7c3026]"
+          className="mt-5 rounded-xl border border-[#f0c7c2] bg-[#fff5f4] px-4 py-3 text-sm leading-6 text-[#9b2119]"
           role="alert"
         >
           <p>{submitError}</p>

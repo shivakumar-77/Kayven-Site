@@ -4,8 +4,8 @@ import Sec from "../components/Sec";
 
 // Metadata for the refund page
 export const metadata = {
-  title: "Refund Policy, Kayven",
-  description: "Kayven's refund policy."
+  title: "Billing Support, Kayven",
+  description: "Contact Kayven about subscription, payment, cancellation, or refund questions."
 };
 
 export default function RefundPage() {
@@ -13,9 +13,9 @@ export default function RefundPage() {
     <>
       {/* Page Hero */}
       <PageHero
-        label="Refund"
-        headline="Refund Policy, Kayven"
-        intro="Learn about our refund policy."
+        label="Billing support"
+        headline="Refund and cancellation enquiries"
+        intro="Contact Kayven for help with a subscription, payment, cancellation, or refund question."
       />
 
       {/* Content Sections */}
@@ -24,13 +24,27 @@ export default function RefundPage() {
           <Sec
             id="refund-policy"
             n=""
-            label="REFUND POLICY"
-            title="Refund Policy"
+            label="BILLING SUPPORT"
+            title="Subscription and billing support"
           >
             <p className="mb-6">
-              To request a refund, email <a href="mailto:shiva@kayven.in" className="underline">shiva@kayven.in</a> from the address on your account.
+              This website does not sell physical goods. For help with a Kayven
+              subscription or payment, email{" "}
+              <a href="mailto:shiva@kayven.in" className="underline">shiva@kayven.in</a>
+              {" "}from the email address associated with your purchase.
             </p>
-            <p className="mb-6">Our refund policy allows returns within 30 days of purchase. Items must be unused, in original packaging, and with proof of purchase. To initiate a refund, please email shiva@kayven.in from the address on your account. Refunds are processed within 5-7 business days after we receive the returned item. Certain items, such as personalized products, are non-refundable.</p>
+            <p className="mb-6">
+              Include the plan name, purchase date, and a brief description of
+              the issue. Refund eligibility and cancellation terms depend on
+              the terms shown when you purchased and the requirements that
+              apply to your purchase. Please review those terms and contact us
+              if you need help.
+            </p>
+            <p className="mb-6">
+              This page does not promise a universal refund outcome or
+              processing time. Any rights available under applicable law are
+              not limited by this support information.
+            </p>
           </Sec>
         </div>
       </section>

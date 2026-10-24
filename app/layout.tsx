@@ -1,14 +1,13 @@
 import type { Metadata } from "next";
-import { Playfair_Display, Source_Serif_4, JetBrains_Mono } from "next/font/google";
+import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import SiteHeader from "./components/SiteHeader";
 import SiteFooter from "./components/SiteFooter";
-import CookieConsent from "./components/CookieConsent";
+import PrivacyNotice from "./components/PrivacyNotice";
 import { SITE_URL } from "@/lib/site";
 
 const pf = Playfair_Display({ subsets: ["latin"], variable: "--font-playfair" });
-const ss = Source_Serif_4({ subsets: ["latin"], variable: "--font-source" });
-const jb = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jb" });
+const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 export const metadataBase = new URL(SITE_URL);
 
@@ -44,14 +43,14 @@ import ClientClasses from "./components/ClientClasses";
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${pf.variable} ${ss.variable} ${jb.variable}`}>
-      <head>
-      </head>
+    <html lang="en" className={`${pf.variable} ${inter.variable}`}>
       <body>
         <ClientClasses />
         <SiteHeader />
-      <CookieConsent />
-        {children}
+        <PrivacyNotice />
+        <div id="main-content" tabIndex={-1}>
+          {children}
+        </div>
         <SiteFooter />
       </body>
     </html>

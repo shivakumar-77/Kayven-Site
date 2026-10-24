@@ -4,7 +4,7 @@ export default function Phone() {
   const s = { vectorEffect: "non-scaling-stroke" as const };
   return (
     <figure className="mx-auto w-full max-w-[280px]">
-      <svg viewBox="0 0 200 400" fill="none" stroke="#000" strokeWidth="2" role="img" aria-label="Illustrative app interface">
+      <svg className="h-auto w-full" viewBox="0 0 200 400" fill="none" stroke="#000" strokeWidth="2" role="img" aria-label="Illustrative app interface">
         <rect x="10" y="10" width="180" height="380" {...s} /><rect x="75" y="18" width="50" height="8" {...s} />
         {[55, 100, 145].map(x => <circle key={x} cx={x} cy="90" r="24" {...s} />)}
         {[55, 100, 145].map(x => <circle key={"i" + x} cx={x} cy="90" r="14" strokeDasharray="30 60" {...s} />)}

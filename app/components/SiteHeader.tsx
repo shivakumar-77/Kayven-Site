@@ -1,6 +1,6 @@
 "use client";
 
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { SIGNUP_URL } from "@/lib/site";
@@ -17,11 +17,11 @@ const navItems = [
 export default function SiteHeader() {
   const pathname = usePathname();
   const [menuOpen, setMenuOpen] = useState(false);
+  const prefersReducedMotion = useReducedMotion();
   const { scrollYProgress } = useScroll();
   const height = useTransform(scrollYProgress, [0, 1], [80, 64]);
-  const progress = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const signupUrl =
-    pathname === "/" ? "/" : pathname === "/pricing" ? "/subscription" : SIGNUP_URL;
+  const progress = useTransform(scrollYProgress, [0, 1], [0, 1]);
+  const signupUrl = SIGNUP_URL;
 
   useEffect(() => {
     setMenuOpen(false);
@@ -44,14 +44,17 @@ export default function SiteHeader() {
 
   return (
     <>
+      <a className="skip-link" href="#main-content">
+        Skip to content
+      </a>
       <motion.header
-        className="fixed left-0 right-0 top-0 z-50 border-b-4 border-black bg-white transition-shadow duration-200"
-        style={{ height }}
+        className="fixed left-0 right-0 top-0 z-50 border-b border-black bg-white transition-shadow duration-200"
+        style={{ height: prefersReducedMotion ? 80 : height }}
       >
         <div className="mx-auto flex h-full max-w-6xl items-center justify-between gap-4 px-5 sm:px-6 md:px-8 lg:px-12">
           <a
             aria-label="Kayven home"
-            className="shrink-0 font-display text-3xl"
+            className="shrink-0 font-display text-3xl font-semibold text-[#4543dd]"
             href="/"
             onClick={() => setMenuOpen(false)}
           >
@@ -63,7 +66,7 @@ export default function SiteHeader() {
               <a
                 key={href}
                 aria-current={pathname === href ? "page" : undefined}
-                className="lbl whitespace-nowrap hover:underline hover:underline-offset-4"
+                className="lbl whitespace-nowrap text-[#151526] transition-colors hover:text-[#302da8]"
                 href={href}
               >
                 {label}
@@ -83,7 +86,7 @@ export default function SiteHeader() {
             aria-controls="mobile-navigation"
             aria-expanded={menuOpen}
             aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            className="flex h-12 w-12 shrink-0 flex-col items-center justify-center gap-[5px] rounded-md border-2 border-black text-black transition-colors hover:bg-black hover:text-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black lg:hidden"
+            className="flex h-12 w-12 shrink-0 flex-col items-center justify-center gap-[5px] rounded-xl border border-[#e8e7f0] text-[#151526] transition-colors hover:bg-[#efeeff] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#4543dd] lg:hidden"
             onClick={() => setMenuOpen((open) => !open)}
             type="button"
           >
@@ -112,12 +115,12 @@ export default function SiteHeader() {
         <motion.div
           aria-hidden="true"
           className="absolute bottom-0 left-0 right-0 h-0.5 origin-left bg-black"
-          style={{ scaleX: progress }}
+          style={{ scaleX: prefersReducedMotion ? 0 : progress }}
         />
 
         <nav
           aria-label="Mobile navigation"
-          className={`absolute left-0 right-0 top-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b-2 border-black bg-white shadow-lg lg:hidden ${
+          className={`absolute left-0 right-0 top-full max-h-[calc(100dvh-5rem)] overflow-y-auto border-b border-[#e8e7f0] bg-white shadow-lg lg:hidden ${
             menuOpen ? "" : "hidden"
           }`}
           id="mobile-navigation"

@@ -12,7 +12,7 @@ export default function NavBar({ navItems, signupUrl }: NavBarProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const { scrollYProgress } = useScroll();
   const height = useTransform(scrollYProgress, [0, 1], [80, 64]);
-  const progress = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const progress = useTransform(scrollYProgress, [0, 1], [0, 1]);
   const pathname = usePathname();
 
   useEffect(() => {
